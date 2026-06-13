@@ -1,0 +1,189 @@
+### SCENE 1: CNN Failure
+**Thời gian video: TBD**
+
+"Slot Attention ban đầu sử dụng một bộ encoder CNN nhỏ với 4 convolutional layer để trích xuất feature từ ảnh đầu vào. Phương pháp này hoạt động tốt trên các tập dữ liệu synthetic như CLEVR và Multi-dSprites, nhưng khi áp dụng lên dữ liệu thực tế, kết quả hoàn toàn thất bại. Mô hình không thể phân tách các object và tạo ra mask không có ý nghĩa. Nguyên nhân cốt lõi: pixel reconstruction tạo ra signal quá yếu cho object-centricness. Mô hình tập trung vào các low-level features như thống kê màu sắc và texture, thay vì phát hiện object thực sự. Trên dataset synthetic, object được phân biệt bằng màu sắc rõ ràng. Nhưng trên dữ liệu thực tế, hai object khác nhau có thể có màu tương tự do ánh sáng, bóng đổ, và occlusion. Nhóm DINOSAUR đã thử nghiệm với ViT-B/16 encoder theo ba chế độ: training from scratch khiến training bị diverge hoàn toàn, frozen DINO weights tạo ra các mask dạng sọc không có ý nghĩa, và finetuning DINO weights cũng thất bại tương tự. Cả ba đều chứng tỏ image reconstruction không cung cấp đủ signal để tạo ra semantic grouping."
+
+---
+
+### SCENE 2: Feature Reconstruction
+**Thời gian video: TBD**
+
+"Nếu pixel reconstruction quá yếu, thì signal nào đủ mạnh? Câu trả lời đến từ Self-Supervised Learning. Các thuật toán SSL như DINO, MoCo-v3, MAE đã chứng minh chúng có thể học powerful representations từ hình ảnh một cách unsupervised, chỉ dựa vào cấu trúc hình ảnh mà không cần nhãn dữ liệu. Ý tưởng chính của DINOSAUR: thay vì tái tạo lại ảnh gốc RGB pixels, hãy tái tạo lại các feature maps từ một mô hình self-supervised đã pre-trained trên ImageNet. Điều này tạo ra training signal mang tính semantic cao hơn rất nhiều. Cơ chế này hoạt động theo mô hình Student-Teacher Knowledge Distillation. Teacher là DINO ViT pre-trained trên ImageNet, tạo ra feature maps giàu semantic. Student là Slot Attention, với bottleneck K slots phải nén toàn bộ thông tin từ teacher features vào dạng có cấu trúc nhỏ hơn. Quá trình này ép buộc các slot phải học cách biểu diễn thông tin hiệu quả. Teacher không chỉ cung cấp target features, mà còn vận chuyển knowledge từ bộ dữ liệu lớn ImageNet sang các dataset nhỏ hơn. Đây là lần đầu tiên transfer learning được áp dụng cho object-centric learning."
+
+---
+
+### SCENE 3: ViT Architecture
+**Thời gian video: TBD**
+
+"Vision Transformer (ViT) đã tạo bước ngoặt lớn trong Computer Vision. Thay vì dùng convolutional layer, ViT chia ảnh thành các patch 16x16 pixels, biến mỗi patch thành token và xử lý bằng kiến trúc Transformer. ViT có ưu điểm vượt trội cho object-centric learning: cơ chế global self-attention nắm bắt mối quan hệ giữa mọi vùng trong ảnh, trong khi CNN chỉ có receptive field giới hạn. Các layer sâu của ViT tự nhiên phân tách ảnh thành vùng semantic tương ứng với object, một đặc tính gọi là object property. Đặc biệt, DINO-trained ViT tạo ra attention maps gần giống object segmentation masks. Kết quả thí nghiệm cho thấy feature reconstruction signal chính là key component quan trọng nhất, chứ không phải việc chọn encoder nào. Tuy nhiên, pre-trained ViT vẫn được ưu tiên vì hội tụ nhanh hơn và tính toán hiệu quả hơn."
+
+---
+
+### SCENE 4: DINOSAUR Model
+**Thời gian video: TBD**
+
+"DINOSAUR là mô hình đầu tiên đưa object-centric learning lên dữ liệu thực tế một cách unsupervised. Kiến trúc gồm ba thành phần. Encoder: frozen DINO ViT pre-trained trên ImageNet, chia ảnh thành patch features. Các feature có thể dùng trực tiếp làm target, hoặc đưa qua ResNet34 encoder. Slot Attention: K slot cạnh tranh qua competitive attention để phân nhóm features thành object slots. Mỗi slot đại diện một object trong scene. Không giống bản gốc, DINOSAUR không thêm positional encoding lên ViT features trước Slot Attention vì position encoding của ViT đã đủ. Decoder: MLP decoder xử lý từng slot độc lập, hoặc Transformer decoder reconstruct autoregressive có điều kiện trên tất cả slots. Loss function minimize MSE giữa reconstructed features và target features trong semantic space thay vì pixel space. DINOSAUR out-perform toàn bộ model trên dataset synthetic, và là mô hình unsupervised đầu tiên scale được lên PASCAL VOC và COCO."
+
+---
+
+### SCENE 5: SSL Comparison
+**Thời gian video: TBD**
+
+"Self-supervised algorithm nào phù hợp nhất cho object-centric learning? Nhóm DINOSAUR thí nghiệm trên bốn phương pháp: DINO, MoCo-v3, MSN, và MAE. Tất cả đều hoạt động tốt, chứng minh self-supervised pre-training tạo ra useful general bias cho object discovery. DINO dùng Vision Transformer với self-distillation, được chọn làm phương pháp chính vì hiệu năng tốt và dễ tiếp cận. MoCo-v3 hoạt động tốt nhưng cài đặt phức tạp hơn. MAE mask 75 phần trăm patches và reconstruct lại, học representation mạnh nhưng thiên về low-level features. Nhóm cũng phát hiện ViT cho kết quả tốt hơn đáng kể so với ResNet cho cả encoder và target feature provider."
+
+---
+
+### SCENE 6: Encoder Upgrade Challenge
+**Thời gian video: TBD**
+
+"Việc thay CNN encoder bằng ViT không đơn giản như nhiều người nghĩ. Vấn đề cốt lõi: encoder càng sâu và lớn, không gian feature ở đầu ra càng cách xa tín hiệu RGB gốc. Chúng ta không thể dùng CNN decoder nhỏ để reconstruct từ slots về ảnh gốc, vì khoảng cách feature space quá lớn. Giải pháp của DINOSAUR: reconstruct trong hidden feature space của teacher model thay vì pixel space. Điều này cho phép giữ nguyên sức mạnh của encoder mà không cần thiết kế decoder phức tạp để convert từ feature space về RGB. Pipeline trở thành: Image, Encoder ViT hoặc ResNet, Slot Attention, Decoder MLP hoặc Transformer, Reconstructed Features, với loss tính giữa reconstructed features và target features từ DINO ViT teacher."
+
+---
+
+### SCENE 7: Optical Flow & Depth
+**Thời gian video: TBD**
+
+"Trước DINOSAUR, các nhà nghiên cứu đã cố khắc phục hạn chế pixel reconstruction bằng cách reconstruct các tín hiệu khác. SAVi mở rộng Slot Attention sang video bằng cách reconstruct optical flow. Các pixel thuộc cùng một object thường chuyển động giống nhau, tạo signal mạnh cho object discovery. SAVi++ mở rộng hơn nữa bằng cách reconstruct depth từ dữ liệu LiDAR. Depth mang thông tin hình học ổn định trước ánh sáng, texture, màu sắc. Đặc biệt hữu ích cho autonomous driving và robotics. SAVi++ được đánh giá trên Waymo Open Dataset, cho phép phát hiện object mà không cần reconstruct RGB pixels. Hạn chế: đòi hỏi dữ liệu LiDAR, giới hạn ứng dụng."
+
+---
+
+### SCENE 8: Dynamic Slots (AdaSlot)
+**Thời gian video: TBD**
+
+"Slot Attention gốc và DINOSAUR đều phải predefine số lượng slot K. K quá nhỏ thì bỏ sót object, K quá lớn thì phân tách object không cần thiết. Đặc biệt trên COCO, số object thay đổi rất nhiều giữa các ảnh. AdaSlot giải quyết bằng cách frame dynamic slot selection như bài toán subset selection. Bắt đầu với nhiều slot, rồi dùng Gumbel Softmax chọn subset phù hợp. Gumbel Softmax cho phép chọn discrete mà vẫn differentiable, train end-to-end. AdaSlot dùng hai loss: reconstruction loss và regularization loss trên số slot được chọn. Kết quả: out-perform DINOSAUR trên mọi metric trên COCO: ARI 75.59 so với 73.23, mBO 35.64 so với 33.85."
+
+---
+
+### SCENE 9: Temporal Similarity (VideoSaur)
+**Thời gian video: TBD**
+
+"VideoSaur là phương pháp khác biệt: thay vì reconstruct features, train slots dự đoán temporal feature similarity giữa các frame. Self-supervised ViT trích xuất features, Slot Attention group thành slots, rồi model predict similarity matrix bằng cross-entropy loss so với ground-truth cosine distance. Phương pháp này không cần reconstruct, giảm độ phức tạp của decoder."
+
+---
+
+### SCENE 10: Part 6 Summary
+**Thời gian video: TBD**
+
+"Phần 6 đã đi qua hành trình nâng cấp encoder: từ việc hiểu tại sao CNN với pixel reconstruction thất bại, đến feature reconstruction là key component, và sự ra đời của DINOSAUR. Chúng ta cũng khám phá reconstruct optical flow với SAVi, depth với SAVi++, dynamic slot number với AdaSlot, và temporal similarity với VideoSaur. Ba điểm chính: pixel reconstruction tạo signal quá yếu vì mô hình tập trung vào color statistics thay vì object structure. Self-supervised feature reconstruction từ DINO ViT tạo signal đủ mạnh cho object grouping. Và các giải pháp mới đang mở rộng giới hạn của object-centric learning. PHẦN 7: UPGRADING DECODER — Nâng cấp Bộ giải mã"
+
+---
+
+### SCENE 11: Slot-Decoding Dilemma
+**Thời gian video: TBD**
+
+"Decoder đóng vai trò tái tạo ảnh từ slot representations. Tuy nhiên tồn tại Slot-Decoding Dilemma, một trong những vấn đề cốt lõi nhất. Decoder yếu như Spatial Broadcast Network có capacity hạn chế, buộc slot phải tập trung vào object riêng biệt, tạo object disentanglement tốt nhưng ảnh bị mờ và thiếu chi tiết. Decoder mạnh như CNN decoder có thể tự tái tạo ảnh đẹp mà không cần thông tin cấu trúc từ slot, khiến slot mất tính object-centric. Nghịch lý: decoder yếu thì slot tốt nhưng ảnh mờ, decoder mạnh thì ảnh đẹp nhưng slot mất object-centric. Giải pháp: phải thay đổi cách tiếp cận hoàn toàn."
+
+---
+
+### SCENE 12: Pixel Independence
+**Thời gian video: TBD**
+
+"Pixel-mixture decoder còn gặp vấn đề Pixel Independence: mỗi pixel được tái tạo độc lập qua alpha compositing, không phụ thuộc pixel khác. Vấn đề trở nên nghiêm trọng khi muốn dùng slot như concept modules để tạo scene mới, giống word embedding trong DALL-E. Khi decode slot từ các ảnh khác nhau, kết quả là superposition đơn giản không có global semantic consistency, tạo ra Frankenstein-like images. Autoregressive decoder như Image GPT tạo được global consistency nhưng đòi hỏi text supervision, trong khi mục tiêu là unsupervised."
+
+---
+
+### SCENE 13: 3D Bias & Decoupling
+**Thời gian video: TBD**
+
+"Slot-Decoding Dilemma có hai hướng giải quyết theo Tutorial CVPR 2024. Hướng 1: 3D Inductive Bias — giữ decoder vừa phải nhưng cung cấp thêm thông tin hình học 3D. Mô hình tiêu biểu: ObSuRF dùng NeRF-based decoder, OSRT dùng Slot Mixer Decoder. Điểm chung: dùng camera pose và ray direction làm inductive bias. Hướng 2: Decoupling Decoding — tách decoding thành nhiều giai đoạn, decode qua ngôn ngữ trung gian. Mô hình tiêu biểu: SLATE dùng VQ tokens và Transformer, LSD dùng latent diffusion, DORSAL dùng multiview diffusion. Điểm chung: tách riêng slot learning và image generation để giảm độ phức tạp."
+
+---
+
+### SCENE 14: MLP vs Transformer
+**Thời gian video: TBD**
+
+"DINOSAUR đề xuất hai loại decoder. MLP Decoder xử lý từng slot độc lập: broadcast slot ra N tokens, cộng learned positional encoding, dùng shared MLP tạo reconstruction và alpha map, rồi weighted sum. Ưu điểm: tính toán cực kỳ hiệu quả nhờ chia sẻ weights, tốt cho instance-level separation với ARI scores cao hơn. Transformer Decoder reconstruct autoregressive: feature tại vị trí n điều kiện trên tất cả features trước đó và toàn bộ slots. Ưu điểm: mask chặt hơn, background separation sạch hơn, cải thiện 9-10 class mBO trên PASCAL và COCO. Tuy nhiên có xu hướng dùng excess slots tách object thành nhiều phần. Khuyến nghị: MLP decoder làm first choice vì đơn giản và ổn định, Transformer decoder khi cần semantic grouping."
+
+---
+
+### SCENE 15: SLATE
+**Thời gian video: TBD**
+
+"SLATE giải quyết cả Slot-Decoding Dilemma lẫn Pixel Independence bằng ngôn ngữ trung gian. Bước 1: DVAE Tokenization chia ảnh thành patch, gán mỗi patch một discrete token qua Gumbel-Softmax. Bước 2: Slot Attention trên token space, mỗi token map qua learned dictionary thành embedding, tạo ra object slots và attention maps. Bước 3: Transformer decoder reconstruct lại sequence tokens theo cách autoregressive, với cross-entropy loss. Thành tựu quan trọng nhất: Visual Concept Library. Sau khi train, dùng K-means clustering nhóm slots từ toàn bộ dataset thành visual concepts như tóc, mặt, object nền. Để tạo ảnh mới, chọn slots từ các clusters khác nhau giống như chọn từ để tạo câu, cho phép zero-shot generation với global semantic consistency."
+
+---
+
+### SCENE 16: Latent Slot Diffusion
+**Thời gian video: TBD**
+
+"Latent Slot Diffusion (LSD) kết hợp Latent Diffusion Models với slot representations, đại diện thế hệ decoder mới nhất. Pre-trained Auto-Encoder nén ảnh thành latent representation ở không gian thấp hơn, giảm computational burden. Slot-Conditioned Diffusion denoise từ Gaussian noise thành latent có điều kiện trên slots, thay vì text embedding như LDM. Denoising Network là biến thể UNet với slot-conditioned transformer. LSD kế thừa Visual Concept Library từ SLATE và mở ra khả năng editing: object removal, insertion, background swapping. Đặc biệt, LSD lần đầu cho phép face editing trên ảnh thực tế."
+
+---
+
+### SCENE 17: DORSAL
+**Thời gian video: TBD**
+
+"DORSAL đưa diffusion-based decoder lên 3D scene rendering. Thay vì tạo 2D image, DORSAL sinh multiple views của 3D scene có consistency không gian. Kiến trúc kết hợp OSRT encoder với Multiview U-Net diffusion model. Context views được encode thành scene representation, Slot Attention tạo Object Slots, rồi slots làm conditioning cho diffusion qua FiLM modulation và cross-attention. Trên cả MultiShapeNet và Street View thực tế, FID score tốt hơn OSRT rất nhiều, tạo ra ảnh sắc nét và realistic hơn."
+
+---
+
+### SCENE 18: ObSuRF
+**Thời gian video: TBD**
+
+"ObSuRF là một trong những mô hình đầu tiên thay CNN decoder 2D bằng NeRF decoder 3D. Mỗi slot được map sang một NeRF độc lập, ánh xạ tọa độ 3D và viewing direction thành volume density và radiance. Khi render novel view, các ray được sample từ từng NeRF slot rồi composite thành ảnh cuối cùng. 3D inductive bias giúp model hiểu cấu trúc không gian, tạo ảnh chất lượng từ nhiều góc nhìn. Hạn chế: yêu cầu multi-view data, chi phí tính toán cao, chỉ hoạt động tốt trên CLEVR-3D synthetic."
+
+---
+
+### SCENE 19: OSRT
+**Thời gian video: TBD**
+
+"OSRT cải tiến hướng 3D với kiến trúc Slot Mixer Decoder sáng tạo. Thay vì decode mỗi slot riêng rồi overlay, OSRT trộn các slots trước rồi map sang ảnh. Slot Mixer gồm: Allocation Transformer predict allocation weight, Mixing Block tính weighted mean, và Render MLP kết hợp features map sang RGB. OSRT dùng light-field rendering thay vì volumetric rendering, giảm chi phí gần 100 lần so với NeRF. Scale được đến Street View thực tế. OSRT cũng là backbone cho DORSAL, slot representations được freeze làm conditioning cho diffusion decoder."
+
+---
+
+### SCENE 20: SysBinder
+**Thời gian video: TBD**
+
+"SysBinder giải quyết vấn đề disentangle thuộc tính của slot. Một slot được biểu diễn bằng nhiều blocks, mỗi block mã hóa thuộc tính cụ thể: block shape, block color, block position. Điều này cho phép không chỉ thay thế object toàn bộ như SLATE, mà chỉnh sửa từng thuộc tính riêng biệt. Tạo khả năng systematic generalization mạnh hơn, vì AI hiểu các thuộc tính độc lập và kết hợp tự do."
+
+---
+
+### SCENE 21: MoToK
+**Thời gian video: TBD**
+
+"MoToK đặt câu hỏi: tại sao không reconstruct nhiều modalities cùng lúc? MoToK dùng pseudo segmentation masks từ motion segmentation, train slots reconstruct đồng thời RGB, Optical Flow, Depth, và Token. Slot Decoder gồm Linear layer, CNN, Transformer, Perceiver cho phép reconstruct nhiều output types. Slots học representation phong phú hơn khi phải tạo nhiều loại output, và pseudo labels hướng dẫn mà không cần ground-truth segmentation."
+
+---
+
+### SCENE 22: CoSA
+**Thời gian video: TBD**
+
+"CoSA đề xuất Grounded Slot Dictionary. Khác với Visual Concept Library của SLATE dùng K-means clustering, CoSA dùng GSD Binding map slot elements vào loại object cụ thể. Ví dụ: bind riêng eyes, facial hair, cheeks, forehead. GSD giải quyết vấn đề của SLATE: K-means clusters có thể không mang ý nghĩa semantic rõ ràng. GSD Binding cung cấp ground truth semantic, giúp compose image chính xác và có kiểm soát hơn."
+
+---
+
+### SCENE 23: ISA
+**Thời gian video: TBD**
+
+"Invariant Slot Attention giải quyết vấn đề nhận diện object có đối xứng không gian. Nhiều object như bàn, bình, cổng có spatial symmetry. Slot Attention gốc có thể tách object đối xứng thành nhiều slot. ISA dùng slot-centric reference frames control position, scale, orientation. Cho phép nhận diện toàn bộ object có đối xứng và thao tác di chuyển, thay đổi kích thước mà không phá hủy cấu trúc. Đặc biệt hữu ích cho robotics."
+
+---
+
+### SCENE 24: DiffFAE
+**Thời gian video: TBD**
+
+"DiffFAE ứng dụng slot-based decoder cho facial editing. Stage 1 dùng Slot Attention trích xuất semantic tokens, chia khuôn mặt thành 4 region. Stage 2 finetune Latent Diffusion Model, dùng Cross-Attention và AdaIN integrate slot features vào denoising process. Kết quả: chỉnh sửa facial compositionally, thay đổi pose, expression, lighting mà giữ nguyên identity. Semantic tokens từ slot attention out-perform features từ MAE và CLIP."
+
+---
+
+### SCENE 25: PaLM-E
+**Thời gian video: TBD**
+
+"PaLM-E kết hợp object-centric representation với Large Language Model. Object slots từ OSRT được đưa vào PaLM LLM. Kiến trúc: Image, OSRT Encoder, Object Slots, ViT, PaLM, Control. PaLM-E demo trên nhiều task embodied AI: robot đi lấy đồ vật, suy nghĩ cách grab block, sắp xếp đồ vật theo màu. Cho thấy object-centric representation có thể làm bridge giữa visual understanding và language-based reasoning."
+
+---
+
+### SCENE 26: Three Paradigms
+**Thời gian video: TBD**
+
+"Tutorial CVPR 2024 tổng hợp 3 paradigms thao tác với slots. Paradigm 1 Substituting: thay slot bằng slot khác, ví dụ thay slot tóc trong SLATE hoặc slot xe trong LSD. Paradigm 2 Manipulating: thay đổi thuộc tính slot, ví dụ swap color trong SysBinder hoặc thay đổi lighting trong DiffFAE. Paradigm 3 Moving: di chuyển slot đến vị trí mới trong Invariant Slot Attention, thay đổi position block để di chuyển object trong scene, quan trọng cho robotics."
+
+---
+
+### SCENE 27: Part 7 Summary
+**Thời gian video: TBD**
+
+"Phần 7 đã đi qua nhiều hướng nâng cấp decoder. Xu hướng rõ ràng: từ decoder đơn giản MLP đến generative model mạnh hơn như Transformer và Diffusion. Triết lý thay đổi: thay vì ép decoder yếu để slot học object, hãy xây decoder đủ mạnh tái tạo ảnh chất lượng cao và thiết kế kiến trúc giữ slot object-centric. Ba điểm chính: Slot-Decoding Dilemma và Pixel Independence là hai vấn đề cốt lõi. Hai hướng giải quyết: 3D Inductive Bias với ObSuRF và OSRT, và Decoupling Decoding với SLATE, LSD, DORSAL. Các ứng dụng thực tế như DiffFAE cho facial editing và PaLM-E cho robotics cho thấy object-centric representation đang mở rộng vào generative AI và embodied AI."
+
+---
+

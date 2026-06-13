@@ -1,0 +1,74 @@
+
+minpr@DESKTOP-O38ONUM MINGW64 /d/KAN/N3-2/CSAI/video/CSAI (kan)
+$ python generate_narration_split_merge.py --test "Slot Attention ban đầu dùng CNN nhỏ (ví dụ 4 layer) trích xuất feature"
+C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydub\utils.py:170: RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work
+  warn("Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work", RuntimeWarning)
+
+============================================================
+Split & Merge TTS Generator (Hoài My + Aria)
+============================================================
+🧪 Đang test phát âm cho: 'Slot Attention ban đầu dùng CNN nhỏ (ví dụ 4 layer) trích xuất feature'
+🎙️  Generating Split & Merge: test_split_merge.mp3...
+C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydub\utils.py:198: RuntimeWarning: Couldn't find ffprobe or avprobe - defaulting to ffprobe, but may not work
+  warn("Couldn't find ffprobe or avprobe - defaulting to ffprobe, but may not work", RuntimeWarning)
+❌ Error generating test_split_merge.mp3: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\minpr\\AppData\\Local\\Temp\\tmp63t8cyx1\\chunk_0.mp3'
+Traceback (most recent call last):
+  File "D:\KAN\N3-2\CSAI\video\CSAI\generate_narration_split_merge.py", line 128, in generate_split_merge
+    audio_segment = AudioSegment.from_mp3(chunk_file)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydub\audio_segment.py", line 796, in from_mp3
+    return cls.from_file(file, 'mp3', parameters=parameters)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydub\audio_segment.py", line 728, in from_file
+    info = mediainfo_json(orig_file, read_ahead_limit=read_ahead_limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydub\utils.py", line 274, in mediainfo_json
+    res = Popen(command, stdin=stdin_parameter, stdout=PIPE, stderr=PIPE)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1028, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1540, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 633, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\minpr\\AppData\\Local\\Temp\\tmp63t8cyx1\\chunk_0.mp3'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\KAN\N3-2\CSAI\video\CSAI\generate_narration_split_merge.py", line 201, in <module>
+    asyncio.run(main())
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\KAN\N3-2\CSAI\video\CSAI\generate_narration_split_merge.py", line 170, in main
+    await generate_split_merge("test", args.test, output_file)
+  File "D:\KAN\N3-2\CSAI\video\CSAI\generate_narration_split_merge.py", line 110, in generate_split_merge
+    with tempfile.TemporaryDirectory() as temp_dir:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 946, in __exit__
+    self.cleanup()
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 950, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 930, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Users\minpr\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 905, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\minpr\\AppData\\Local\\Temp\\tmp63t8cyx1\\chunk_0.mp3'
