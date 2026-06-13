@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+.env
+.env.*
+.git.empty_backup/
+
+# Manim/render outputs
+media/
+output/
+narration/
+temp_segments/
+Tex/
+texts/
+images/
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# OS / downloaded metadata
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+
+# Local scratch and generated builder outputs
+manim-video-builder/venv/
+manim-video-builder/output/
+manim-video-builder/media/
+manim-video-builder/manim_scenes/backups_before_animation_upgrade/
+manim-video-builder/scratch/
+manim-video-builder/input/*wsl.localhost*

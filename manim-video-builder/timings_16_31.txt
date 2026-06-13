@@ -1,0 +1,188 @@
+Timings for output/scenes/scene_016/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.246s
+Segment 2: Start: 4.207s - End: 7.524s
+Segment 3: Start: 8.496s - End: 11.445s
+Segment 4: Start: 12.430s - End: 13.290s
+Segment 5: Start: 13.667s - End: 16.200s
+Segment 6: Start: 17.171s - End: 20.467s
+Segment 7: Start: 21.459s - End: 25.068s
+Segment 8: Start: 26.042s - End: 29.014s
+Segment 9: Start: 30.062s - End: 36.190s
+----------------------------------------
+Timings for output/scenes/scene_017/narration.mp3:
+Segment 1: Start: 0.000s - End: 8.733s
+Segment 2: Start: 9.704s - End: 13.244s
+Segment 3: Start: 14.215s - End: 20.721s
+Segment 4: Start: 21.695s - End: 25.095s
+Segment 5: Start: 26.067s - End: 29.121s
+Segment 6: Start: 30.084s - End: 31.964s
+Segment 7: Start: 32.377s - End: 36.403s
+----------------------------------------
+Timings for output/scenes/scene_018/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.268s
+Segment 2: Start: 4.239s - End: 7.166s
+Segment 3: Start: 8.139s - End: 11.573s
+Segment 4: Start: 12.559s - End: 15.901s
+Segment 5: Start: 16.863s - End: 19.979s
+Segment 6: Start: 20.972s - End: 24.633s
+Segment 7: Start: 25.604s - End: 27.233s
+Segment 8: Start: 27.600s - End: 28.600s
+Segment 9: Start: 29.580s - End: 32.233s
+Segment 10: Start: 32.628s - End: 35.085s
+----------------------------------------
+Timings for output/scenes/scene_019/narration.mp3:
+Segment 1: Start: 0.000s - End: 1.628s
+Segment 2: Start: 2.024s - End: 4.344s
+Segment 3: Start: 5.339s - End: 6.244s
+Segment 4: Start: 6.594s - End: 11.934s
+Segment 5: Start: 12.893s - End: 15.020s
+Segment 6: Start: 15.359s - End: 16.641s
+Segment 7: Start: 17.619s - End: 20.531s
+Segment 8: Start: 21.504s - End: 24.657s
+Segment 9: Start: 25.612s - End: 29.078s
+Segment 10: Start: 30.055s - End: 35.230s
+----------------------------------------
+Timings for output/scenes/scene_020/narration.mp3:
+Segment 1: Start: 0.000s - End: 2.037s
+Segment 2: Start: 2.412s - End: 4.134s
+Segment 3: Start: 5.134s - End: 8.433s
+Segment 4: Start: 9.413s - End: 12.779s
+Segment 5: Start: 13.752s - End: 17.138s
+Segment 6: Start: 18.140s - End: 21.176s
+Segment 7: Start: 22.139s - End: 25.291s
+Segment 8: Start: 26.262s - End: 26.675s
+Segment 9: Start: 27.012s - End: 29.701s
+Segment 10: Start: 30.678s - End: 33.428s
+Segment 11: Start: 33.828s - End: 36.888s
+----------------------------------------
+Timings for output/scenes/scene_021/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.888s
+Segment 2: Start: 4.860s - End: 8.233s
+Segment 3: Start: 9.216s - End: 9.644s
+Segment 4: Start: 10.053s - End: 12.398s
+Segment 5: Start: 13.377s - End: 14.493s
+Segment 6: Start: 14.861s - End: 17.171s
+Segment 7: Start: 18.146s - End: 20.873s
+Segment 8: Start: 21.842s - End: 23.504s
+Segment 9: Start: 23.870s - End: 25.536s
+Segment 10: Start: 26.515s - End: 29.776s
+Segment 11: Start: 30.807s - End: 36.535s
+----------------------------------------
+Timings for output/scenes/scene_022/narration.mp3:
+Segment 1: Start: 0.000s - End: 4.223s
+Segment 2: Start: 5.198s - End: 8.650s
+Segment 3: Start: 9.622s - End: 10.740s
+Segment 4: Start: 11.097s - End: 12.867s
+Segment 5: Start: 13.839s - End: 17.252s
+Segment 6: Start: 18.224s - End: 21.601s
+Segment 7: Start: 22.563s - End: 25.928s
+Segment 8: Start: 26.904s - End: 30.047s
+Segment 9: Start: 31.042s - End: 34.197s
+Segment 10: Start: 34.616s - End: 37.313s
+----------------------------------------
+Timings for output/scenes/scene_023/narration.mp3:
+Segment 1: Start: 0.000s - End: 6.398s
+Segment 2: Start: 7.381s - End: 11.177s
+Segment 3: Start: 12.142s - End: 15.045s
+Segment 4: Start: 16.024s - End: 19.599s
+Segment 5: Start: 20.569s - End: 23.688s
+Segment 6: Start: 24.654s - End: 26.786s
+Segment 7: Start: 27.122s - End: 28.745s
+Segment 8: Start: 29.729s - End: 32.772s
+Segment 9: Start: 33.749s - End: 40.140s
+----------------------------------------
+Timings for output/scenes/scene_024/narration.mp3:
+Segment 1: Start: 0.000s - End: 1.712s
+Segment 2: Start: 2.113s - End: 3.577s
+Segment 3: Start: 3.904s - End: 5.207s
+Segment 4: Start: 6.182s - End: 6.866s
+Segment 5: Start: 7.288s - End: 9.797s
+Segment 6: Start: 10.767s - End: 13.518s
+Segment 7: Start: 14.492s - End: 17.615s
+Segment 8: Start: 18.599s - End: 20.539s
+Segment 9: Start: 20.875s - End: 22.106s
+Segment 10: Start: 23.088s - End: 26.527s
+Segment 11: Start: 27.506s - End: 30.320s
+Segment 12: Start: 31.304s - End: 36.958s
+----------------------------------------
+Timings for output/scenes/scene_025/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.446s
+Segment 2: Start: 4.443s - End: 7.816s
+Segment 3: Start: 8.778s - End: 10.469s
+Segment 4: Start: 10.818s - End: 12.359s
+Segment 5: Start: 13.336s - End: 16.459s
+Segment 6: Start: 17.478s - End: 20.478s
+Segment 7: Start: 21.456s - End: 24.895s
+Segment 8: Start: 25.869s - End: 28.881s
+Segment 9: Start: 29.867s - End: 35.889s
+----------------------------------------
+Timings for output/scenes/scene_026/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.926s
+Segment 2: Start: 4.884s - End: 8.910s
+Segment 3: Start: 9.891s - End: 12.214s
+Segment 4: Start: 13.202s - End: 13.623s
+Segment 5: Start: 13.945s - End: 14.576s
+Segment 6: Start: 14.898s - End: 17.460s
+Segment 7: Start: 18.415s - End: 21.244s
+Segment 8: Start: 22.224s - End: 25.722s
+Segment 9: Start: 26.694s - End: 29.471s
+Segment 10: Start: 30.453s - End: 33.253s
+Segment 11: Start: 33.601s - End: 37.484s
+----------------------------------------
+Timings for output/scenes/scene_027/narration.mp3:
+Segment 1: Start: 0.000s - End: 2.697s
+Segment 2: Start: 3.669s - End: 7.395s
+Segment 3: Start: 8.358s - End: 11.262s
+Segment 4: Start: 12.259s - End: 15.806s
+Segment 5: Start: 16.773s - End: 19.199s
+Segment 6: Start: 20.191s - End: 26.811s
+Segment 7: Start: 27.785s - End: 33.967s
+----------------------------------------
+Timings for output/scenes/scene_028/narration.mp3:
+Segment 1: Start: 0.000s - End: 4.005s
+Segment 2: Start: 4.971s - End: 6.503s
+Segment 3: Start: 6.878s - End: 9.045s
+Segment 4: Start: 10.016s - End: 12.976s
+Segment 5: Start: 13.947s - End: 17.554s
+Segment 6: Start: 18.540s - End: 21.336s
+Segment 7: Start: 22.338s - End: 26.011s
+Segment 8: Start: 26.981s - End: 29.739s
+Segment 9: Start: 30.738s - End: 36.448s
+----------------------------------------
+Timings for output/scenes/scene_029/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.632s
+Segment 2: Start: 4.584s - End: 8.348s
+Segment 3: Start: 9.329s - End: 12.139s
+Segment 4: Start: 13.109s - End: 13.738s
+Segment 5: Start: 14.076s - End: 16.917s
+Segment 6: Start: 17.883s - End: 20.949s
+Segment 7: Start: 21.994s - End: 25.978s
+Segment 8: Start: 26.957s - End: 30.089s
+Segment 9: Start: 31.067s - End: 36.293s
+----------------------------------------
+Timings for output/scenes/scene_030/narration.mp3:
+Segment 1: Start: 0.000s - End: 4.215s
+Segment 2: Start: 5.190s - End: 6.264s
+Segment 3: Start: 6.633s - End: 8.893s
+Segment 4: Start: 9.866s - End: 12.986s
+Segment 5: Start: 13.964s - End: 14.376s
+Segment 6: Start: 14.725s - End: 18.144s
+Segment 7: Start: 19.129s - End: 21.732s
+Segment 8: Start: 22.709s - End: 23.113s
+Segment 9: Start: 23.499s - End: 27.026s
+Segment 10: Start: 27.990s - End: 30.579s
+Segment 11: Start: 31.574s - End: 37.566s
+----------------------------------------
+Timings for output/scenes/scene_031/narration.mp3:
+Segment 1: Start: 0.000s - End: 3.671s
+Segment 2: Start: 4.633s - End: 5.076s
+Segment 3: Start: 5.456s - End: 8.385s
+Segment 4: Start: 9.371s - End: 12.207s
+Segment 5: Start: 13.248s - End: 17.101s
+Segment 6: Start: 18.063s - End: 20.152s
+Segment 7: Start: 20.552s - End: 22.029s
+Segment 8: Start: 22.992s - End: 26.022s
+Segment 9: Start: 27.010s - End: 30.771s
+Segment 10: Start: 31.741s - End: 34.040s
+Segment 11: Start: 34.436s - End: 38.004s
+----------------------------------------

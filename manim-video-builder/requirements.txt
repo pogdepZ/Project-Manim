@@ -1,0 +1,5 @@
+manim
+edge-tts
+pydub
+rich
+typer
